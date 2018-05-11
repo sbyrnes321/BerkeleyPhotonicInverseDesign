@@ -21,7 +21,7 @@ yBC = 1; % 1 = force y-symmetry (vertical symmetry about y = y0+.5*yLengthReal)
 diagBC=0; % 1 = force symmetry along the diagonals
 
 maxlsIter=3000; % Maximum updates of the level set function
-sideAnchoring=1;  % Anchors the boarder points of the initial geometry so they don't move during the optimization
+sideAnchoring=1;  % Anchors the border points of the initial geometry so they don't move during the optimization
 
 numFreq=1;  % number of frequencies to optimize over
 mf_weight=[1 1 1 1 1 1]; %weight of the different frequencies

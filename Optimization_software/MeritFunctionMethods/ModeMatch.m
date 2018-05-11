@@ -3,8 +3,8 @@ classdef ModeMatch < Monitor
  
     properties
         % Mode profile
-        Em; % mode electric field on internal mesh
-        Hm; % mode magnetic field on internal mesh (Em OR Hm specified)
+        Em; % mode electric field on internal (matlab) mesh
+        Hm; % mode magnetic field on internal (matlab) mesh (both Em & Hm required for mode matching(?))
         surface_normal; %1 = x, 2 = y, 3 = z
     end
     
@@ -25,7 +25,8 @@ classdef ModeMatch < Monitor
                 error('Mode-Matching Monitor is 3D: not allowed.');
             end
             
-            
+            % interpFields (method of Monitor class) interpolates E & H
+            % from "grid" (lumerical mesh) to "internal" (matlab mesh).
             [eInt,hInt] = interpFields(obj,EmGrid,HmGrid,grid);
             obj.Em=eInt;
             obj.Hm = hInt;
@@ -40,8 +41,15 @@ classdef ModeMatch < Monitor
         end
         
         %% CALCULATE MERIT FUNCTION AND DIPOLE AMPLITUDES
-        % Merit = Merit=abs(int(E*conj(Hm)).z)/abs(int(Em*conj(Hm).z)
-		% *=vector product; .=scalar product
+        % Merit = abs(int(E*conj(Hm)).z)/abs(int(Em*conj(Hm).z)
+		% where * means vector (cross) product, and . means scalar (dot) product
+        % F(1,i) is the merit function for frequency i
+        % dip(1,i) is the cell array {{pxDip,pyDip,pzDip,mxDip,myDip,mzDip}} representing
+        % the mode at frequency i as a sum of electric and magnetic dipoles at different
+        % points; for example pxDip is an array describing the amplitude of each x-oriented
+        % electric dipole.
+        % pos is {{xInt,yInt,zInt}}, where xInt is the list of x-coordinates comprising
+        % the monitor.
         function [F,dip,pos] =  calcMerit(obj, eField, hField, grid, powerNorm, freqInd)
             
             numFreq = length(freqInd);

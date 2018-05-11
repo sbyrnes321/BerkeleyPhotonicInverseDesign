@@ -7,8 +7,8 @@
 % 6. Figure of Merit
 
 %% LUMERICAL SIMULATION ---------------------------------------------------------------------------
-velocityMon = 'Velocity';
-indexMon = 'Index';
+velocityMon = 'Velocity'; % name of a Lumerical DFT monitor spanning the optimization region
+indexMon = 'Index'; % name of a Lumerical index monitor spanning the (same) optimization region
 userSim = ''; % name of .lsf to handle special user-defined co-optimization parameters
 numUserSims = 0; % Number of special user-defined co-optimization parameters
 
@@ -16,9 +16,9 @@ numUserSims = 0; % Number of special user-defined co-optimization parameters
 numIter = 10; % Number of optimization iterations to run
 
 %% FREQEUNCY --------------------------------------------------------------------------------------
-% (choose a subsequent option)
+% (choose a subsequent option, comment out the others)
 
-%% FREQEUNCY >> SINGLE FREQUENCY
+%% FREQUENCY >> SINGLE FREQUENCY
 f = 3e8/900e-9; % frequency
 freq = [f f 1];
 
@@ -279,7 +279,7 @@ mf = MeritFunction(mf_operatorOrder, mf_operators);
 mf_type = 'fieldenergy';
 mf_weight = [1 1 1]; % frequency dependent weights
 mf_exp = 1; % exponent
-mf_dx = 3e-9; % discritization (meters) (don't make it too small)
+mf_dx = 3e-9; % discretization (meters) (don't make it too small)
 params = 3; % 1 = E intensity, 2 = H intensity, 3 = absorption
 mf_mon = 'merit1'; % Lumerical monitor name
 merit1 = {mf_type, mf_mon, mf_weight, mf_exp, mf_dx, params};

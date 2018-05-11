@@ -16,7 +16,7 @@ numUserSims = 0; % Number of special user-defined co-optimization parameters
 %% OPTIMIZATION -----------------------------------------------------------------------------------
 %numIter = 100; % Number of optimization iterations to run
 
-%% FREQEUNCY --------------------------------------------------------------------------------------
+%% FREQUENCY --------------------------------------------------------------------------------------
 f1 = 3e8/wavelength_stop;
 f2 = 3e8/wavelength_start;
 numFreq = numFreq;
@@ -49,7 +49,7 @@ diagBC=diagBC; % 1 = force symetry along the diagonals
 % Optimization step size
 maxArea = maxArea; % Maximium total area change per iteration
 maxlsIter=maxlsIter; % Maximum updates of the level set function
-sideAnchoring=sideAnchoring;  % Anchors the boarder points of the initial geometry so they don't move during the optimization
+sideAnchoring=sideAnchoring;  % Anchors the border points of the initial geometry so they don't move during the optimization
 
 % Make Geometry Object (must be called 'geo')
 % Recommended: Use same x0, y0, z0... as the Geometry object
